@@ -1,9 +1,9 @@
-/** @format */
+//** @format */
 
 'use strict';
 
-/** Sets up the logic of the word search game by inserting the given list of words into
- * a 2D matrix in various orientations (global objects defined in wordpaths.js)
+/** This creates the logic of the word search game by inserting the given list of words into
+ * a 2D matrix 
  *
  * @param {String} gameId ID for the word search grid container
  * @param {String[][]} list 2D array of words to insert into the word matrix
@@ -26,7 +26,7 @@ function WordSearchLogic(gameId, list) {
 	var wordLocations = {};
 
 	/** setUpGame is a property of WordSearchLogic that initializes the creation of the
-	 * word matrix!
+	 * word matrix
 	 */
 	this.setUpGame = function () {
 		//creates a 2D array with the given board size
@@ -57,7 +57,7 @@ function WordSearchLogic(gameId, list) {
 	}
 
 	/** this function loops through the list of words and fits them inside the 2D array
-	 * that represents a word search grid of letters!
+	 * that represents a word search grid of letters
 	 *
 	 * @param {String[][]} wordList array of words to fit in matrix
 	 * @param {Array[]} matrix to fit words in.
@@ -152,7 +152,7 @@ function WordSearchLogic(gameId, list) {
 		}
 	}
 
-	/** properly places the given word into the puzzle array!
+	/** properly places the given word into the puzzle array
 	 *
 	 * @param {String} w word to set
 	 * @param {Array[]} m matrix to set the word into
@@ -259,7 +259,7 @@ function WordSearchLogic(gameId, list) {
 		return array.filter((i) => i !== indexElement);
 	}
 
-	/** generates a random number!
+	/** generates a random #
 	 *
 	 * @param {Number} bound the max number the generated number can be (excluded)
 	 * @return a random number between 0 and bound-1
@@ -268,7 +268,6 @@ function WordSearchLogic(gameId, list) {
 		return Math.floor(Math.random() * bound);
 	}
 	/** 'trims' the given word by removing non-alphanumeric characters
-	 * (alphanumeric characters: [A-Z, a-z, 0-9, _])
 	 *
 	 * @param {String} word
 	 * @return a trimmed string
