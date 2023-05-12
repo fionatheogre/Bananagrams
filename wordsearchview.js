@@ -2,8 +2,7 @@
 
 'use strict';
 
-/** This object contains the necessary functions to create the 'view' of the word search,
- * which essentially refers to displaying the puzzle and handling mouse events!
+/*
  *
  * @author Fiona Oliver
  *
@@ -42,7 +41,7 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 		column: 'column',
 	};
 
-	/* creates the word search puzzle grid and the table containing the list
+	/* creates the word search puzzle grid & table containing the list
 	 * of words to find.
 	 */
 	this.setUpView = function () {
@@ -56,12 +55,11 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 		createListOfWords(list, listId);
 	};
 
-	/** used strings because it was easy enough for a small program like this, wanted
-	to explore jQuery's capabilities! **/
+	// used strings 
 
-	/** used buttons because <td> would expand when adding border when found - stylistic purposes**/
+	// used buttons because <td> would expand when adding border when found fo style
 
-	/** this funcion makes a 'table' of divs to store each letter in the matrix of letters
+	/** this funcion makes a table of divs to store each letter in the matrix of letters
 	 * created in wordsearchlogic.js
 	 *
 	 * @param {Array[]} matrix
@@ -82,7 +80,7 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 				//each letter in the row is a button element
 				var letter = $('<button/>'); //i hearbuttons are preferred for clickable actions
 
-				//the letter is given a cell class, and given row and column attributes!
+				//the letter is given a cell class, and given row and column attributes
 				letter
 					.attr({
 						class: cellName,
@@ -101,11 +99,10 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 	}
 
 	/** This function creates a table-type object to insert all the words
-	 * contained in the word search puzzle! players refer to this table
-	 * when looking for words to find
+	 * in the word search puzzle! like a table of contents
 	 *
 	 * @param {Array[]} wordList a matrix of words to insert into list container
-	 * @param {String} wordListId the ID of the container!
+	 * @param {String} wordListId the ID of the container
 	 */
 	function createListOfWords(wordList, wordListId) {
 		//loops through rows
@@ -116,10 +113,10 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 
 			//loops through columns
 			for (var j = 0; j < wordList[i].length; j++) {
-				//each individual word is a list item element!
+				//each individual word is a list item element
 				var word = $('<li/>');
 
-				//they're given a list word class, and an attribute containing it's trimmed text (as in the puzzle)
+				//they're given a list word class & a attribute containing it's trimmed text like in puzzle
 				word.attr({
 					class: 'listWord',
 					text: wordList[i][j].replace(/\W/g, ''),
@@ -137,7 +134,7 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 		}
 	}
 
-	/** this function solves the puzzle for the player!
+	/** this function solves puzzle for player
 	 *
 	 * @param {Object} loc an object containing the locations of all the words to find in the puzzle!
 	 * @param {Array[]} matrix the grid in which the words are placed in!
@@ -187,7 +184,7 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 
 	/** this function encapsulates all the mouse events for making a move by breaking it down
 	 * into three main parts: pressing the mouse down (mousedown), dragging it (mouseenter),
-	 * and finally releasing the mouse (mouseup)!
+	 * & finally releasing the mouse (mouseup)!
 	 */
 	this.triggerMouseDrag = function () {
 		//empty array to store the selected cells in a move
@@ -217,7 +214,7 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 		});
 
 		/** this code executes when the mouse is down and the user starts moving their
-		 * mouse inside the puzzle container!
+		 * mouse inside the box
 		 */
 		$(select.cells).mouseenter(function () {
 			//ensures the mouse is down and the cell the mouse is on is on a valid path
@@ -250,19 +247,12 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 				selectedLetters = cells.array;
 			}
 		});
-
-		/** this code calls the endMove function when the mouse is released - it mostly checks
-		 * the word made and whether it's a word to be found, as well as resetting variables
-		 * to allow another move
-		 */
+		
 		$(select.cells).mouseup(function () {
 			endMove();
 		});
 
-		/** if the user is playing the game and moves their mouse out of the word grid, this function
-		 * makes it so that the move automatically ends - this makes pressing the mouse down and
-		 * accidentally/purposely leaving the board less annoying to deal with!
-		 */
+		//makes mouse not work outside box
 		$(gameId).mouseleave(function () {
 			if (mouseIsDown) {
 				//checks that the user is indeed pressing their mouse down (therefore, playing)
@@ -271,9 +261,7 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 			}
 		});
 
-		/** this function handles everything ending a move should consist of - resetting variables
-		 * for a new move and checking if a proper word to find has been made
-		 */
+		//resets var if move is made 
 		function endMove() {
 			//sets mouse down as false since the mouse is now up
 			mouseIsDown = false;
@@ -328,9 +316,8 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 		});
 	}
 
-	/** this functions makes a given path selectable but giving each cell in the path a 'selectable' class!
-	 * this makes it so that the player can only select cells on specific paths (which makes selecting vertically,
-	 * horizontally, and diagonally much less of a hassle!)
+	/** this functions makes a given path selectable but giving each cell in the path a 'selectable' class
+	 * so players can only select highlighted and legal game moves
 	 *
 	 * @param {Number} x - starting x-coordinate/row of the path
 	 * @param {Number} y - starting y-coordinate/column of the path
@@ -372,7 +359,7 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 		}
 	}
 
-	/** this function finds and selects the range of cells from the pivot (first selected cell) to
+	/** this function finds and selects the range of cells from the first selected cell to
 	 * the cell the mouse is currenty hovering on, altogether going from end to end on the puzzle
 	 * matrix
 	 *
@@ -395,7 +382,7 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 		//variable to hold index of cell hovered on
 		var hoverIndex;
 
-		//variable to hold index of pivot
+		//variable to hold index of first selected cell
 		var pivotIndex;
 
 		//selector for cells in the particular path the mouse is on
@@ -411,10 +398,10 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 				hoverIndex = hoveredCell.index(cellRange) + 1;
 				pivotIndex = 0;
 
-				//sets up wordConstructed with the pivot's letter (to start it off)
+				//sets up wordConstructed with the first cell to start
 				wordConstructed = $(select.pivot).text();
 
-				//using the pivot text, selects cells and adds their text to wordConstructed
+				//using the first cell selected/pivot text, selects cells and adds their text to wordConstructed
 				wordConstructed = selectLetters(
 					selectedCells,
 					wordConstructed,
@@ -468,7 +455,7 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 		lowerIndex,
 		upperIndex
 	) {
-		//only goes through the the range between the pivot and wherever the mouse is on the path!
+		//only goes through the the range between the pivot and wherever the mouse is on the path
 		$(range)
 			.slice(lowerIndex, upperIndex)
 			.each(function () {
@@ -486,8 +473,7 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 	}
 
 	/** checks if the word a user made after a move is an actual word to find, and
-	 * if so, sets the word as found! otherwise, nothing happens (so the move is
-	 * essentially ignored)
+	 * if so, sets the word as found! otherwise, nothing happens
 	 *
 	 * @param {Array[]} wordList - matrix of words in the grid
 	 * @param {String} wordToCheck - word to check for validity
@@ -520,7 +506,7 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 	}
 
 	/** checks if all the words in the puzzle have been found, what method was used to
-	 * solve the puzzle, and updates the h2 instructions heading accordingly
+	 * solve the puzzle, and updates the h2 instructions heading 
 	 *
 	 * @param {String} fullList - selector for words in the wordlist div
 	 * @param {String} foundWordsList - selector found words in the wordlist div
@@ -548,7 +534,7 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 		return false;
 	}
 
-	/** reverses a string! (e.g. 'muscat' becomes 'tacsum')
+	/** reverses a string
 	 *
 	 * @param {String} word - word to reverse
 	 * @return the reversed word
@@ -557,7 +543,7 @@ function WordSearchView(matrix, list, gameId, listId, instructionsId) {
 		//creates empty string to store reversed word
 		var reversedWord = '';
 
-		//loops through from end of word to the beginning (instead of traditional beginning to end)
+		//loops through from end of word to the beginning 
 		for (var i = word.length - 1; i >= 0; i--) {
 			//adds the character to reversed word
 			reversedWord += word.charAt(i);
