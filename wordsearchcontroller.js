@@ -3,7 +3,7 @@
 'use strict';
 
 /** This object sets up the word search game, as well as button functions (for solving
- * and for refreshing/setting up a new game)..
+ * and for refreshing/setting up a new game).
  *
  * @author Fiona Oliver
  *
